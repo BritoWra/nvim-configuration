@@ -39,10 +39,17 @@ return {
             -- get access to the lspconfig plugins functions
             local lspconfig = require("lspconfig")
 
-           lspconfig.lua_ls.setup({})
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-           lspconfig.tsserver.setup({})
+            -- setup the lua language server
+            lspconfig.lua_ls.setup({
+                capabilities = capabilities,
+            })
 
+            -- setup the typescript language server
+            lspconfig.tsserver.setup({
+                capabilities = capabilities,
+            })
 
             -- Set vim motion for <Space> + c + h to show code documentation about the code the cursor is currently over if available
             vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over Documentation" })
